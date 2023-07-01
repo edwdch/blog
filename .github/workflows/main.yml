@@ -29,5 +29,7 @@ jobs:
         run: pnpm build
       
       - name: tar
-        run: tar -zcvf dist.tar.gz docs/dist
+        run: |
+          pwd
+          tar -zcvf dist.tar.gz docs/dist
       
