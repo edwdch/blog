@@ -29,7 +29,15 @@ jobs:
         run: pnpm build
       
       - name: tar
-        run: |
-          pwd
-          tar -zcvf dist.tar.gz docs/dist
+        run:
+          tar -zcvf dist.tar.gz docs/.vitepress/dist
       
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "dist.tar.gz"
+          target: /data/blog-dir
