@@ -35,9 +35,9 @@ jobs:
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.blog.HOST }}
+          username: ${{ secrets.blog.USERNAME }}
+          password: ${{ secrets.blog.PASSWORD }}
+          port: ${{ secrets.blog.PORT }}
           source: "dist.tar.gz"
           target: /data/blog-dir
