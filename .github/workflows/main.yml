@@ -25,5 +25,9 @@ jobs:
           # If specified, run `pnpm install`
           run_install: true
 
-      - name: Build
+      - name: build
         run: pnpm build
+      
+      - name: tar
+        run: tar -zcvf dist.tar.gz docs/dist
+      
