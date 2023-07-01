@@ -30,8 +30,9 @@ jobs:
         run: pnpm build
       
       - name: tar
-        run:
-          tar -zcvf dist.tar.gz docs/.vitepress/dist
+        run: |
+          cd docs/.vitepress
+          tar -zcvf ../../dist.tar.gz dist
       
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
