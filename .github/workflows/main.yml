@@ -49,5 +49,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /data/blog-dir/
-            rm -rf dist
-            tar -zxvf /data/blog-dir/dist.tar.gz
+            rm -rf dist/
+            tar -zxvf dist.tar.gz
