@@ -5,18 +5,20 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "serve": "vitepress serve docs"
+    "serve": "vitepress serve docs",
+    "up": "taze major -I"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.1.30",
-    "element-plus": "^2.3.4",
-    "vue": "^3.2.47"
+    "@sugarat/theme": "^0.1.32",
+    "element-plus": "^2.3.7",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "sass": "^1.59.2",
-    "typescript": "^4.9.5",
-    "vitepress": "1.0.0-beta.2"
+    "sass": "^1.63.6",
+    "taze": "^0.11.2",
+    "typescript": "^5.1.6",
+    "vitepress": "1.0.0-beta.3"
   },
   "author": "Edward Chen",
   "license": "MIT"
