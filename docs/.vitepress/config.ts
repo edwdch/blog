@@ -54,7 +54,7 @@ const blogTheme = getThemeConfig({
 export default defineConfig({
   extends: blogTheme,
   lang: 'zh-cn',
-  title: '爱德华',
+  title: 'Edward Chen\'s Blog',
   description: '爱德华的博客，基于 vitepress',
   vite: {
     optimizeDeps: {
@@ -68,7 +68,7 @@ export default defineConfig({
     footer: {
       // message: '自定义底部内容',
       copyright:
-        'MIT Licensed | <a target="_blank" href="https://theme.sugarat.top/"> Edward Chen\'s Blog </a>'
+        'MIT Licensed | <a target="_blank" href="https://lnku.cc"> Edward Chen\'s Blog </a>'
     },
     logo: '/logo.png',
     // editLink: {
