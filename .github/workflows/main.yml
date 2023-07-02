@@ -28,7 +28,7 @@ jobs:
       - name: tar
         run: |
           cd docs/.vitepress
-          tar -zcvf dist.tar.gz dist
+          tar -zcvf ../../dist.tar.gz dist
       
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
@@ -37,7 +37,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "docs/.vitepress/dist.tar.gz"
+          source: "dist.tar.gz"
           target: /data/blog-dir
           
       - name: executing remote ssh commands using password
@@ -49,5 +49,8 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /data/blog-dir/
+            mkdir temp
+            tar -zxvf dist.tar.gz -C temp
             rm -rf dist/
-            tar -zxvf dist.tar.gz
+            mv temp/dist dist/
+            rm -rf temp
