@@ -12,7 +12,7 @@ tag:
 
 ## Node.js
 
-我们通过不直接安装 Node.js，而是使用 [nvm-windows](https://github.com/coreybutler/nvm-windows) 来管理 Node.js 的版本。Linux 环境下我们使用 [nvm](https://github.com/nvm-sh/nvm) 。
+我们通常不会直接安装 Node.js，而是使用 [nvm-windows](https://github.com/coreybutler/nvm-windows) 来管理 Node.js 的版本。Linux 环境下我们使用 [nvm](https://github.com/nvm-sh/nvm) 。
 
 配置镜像源以加速下载
 
@@ -64,7 +64,7 @@ This is a partial list. For a complete list, visit https://nodejs.org/en/downloa
 nvm install lts
 ```
 
-安装指定版本：
+安装指定版本
 
 ```bash
 nvm install 18
