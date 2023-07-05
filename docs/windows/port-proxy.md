@@ -33,7 +33,7 @@ netsh interface portproxy delete v4tov4 listenport=8000 listenaddress=0.0.0.0
 
 - 批量设置端口转发
 
-```bash
+```powershell
 # 设置IP地址
 $connectaddress = "192.168.2.105"
 
