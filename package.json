@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.1.32",
-    "element-plus": "^2.3.7",
-    "vue": "^3.3.4"
+    "@sugarat/theme": "^0.2.6",
+    "element-plus": "^2.4.2",
+    "vue": "^3.3.7"
   },
   "devDependencies": {
-    "sass": "^1.63.6",
-    "taze": "^0.11.2",
-    "typescript": "^5.1.6",
-    "vitepress": "1.0.0-beta.3"
+    "sass": "^1.69.5",
+    "taze": "^0.12.0",
+    "typescript": "^5.2.2",
+    "vitepress": "1.0.0-rc.24"
   },
   "author": "Edward Chen",
   "license": "MIT"
