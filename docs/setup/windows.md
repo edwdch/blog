@@ -1,14 +1,31 @@
 ---
 top: 1
 sticky: 1
-description: Windows 开发环境快速配置
+description: Windows 快速配置
 date: 2023-07-02 09:43:00
 tag:
  - 快速配置
  - Windows
 ---
 
-# Windows 开发环境快速配置
+#  Windows 快速配置
+
+## JetBrains
+
+通过 [JetBrains Toolbox](https://www.jetbrains.com/zh-cn/lp/toolbox) 来安装所需要的 IDE。
+
+如果无法通过 Toolbox 的页面设置 IDE 的安装位置，则需要通过配置文件修改。
+
+配置文件路径为 `C:\Users\%USERNAME%\AppData\Local\JetBrains\Toolbox\.settings.json`。
+
+如需设置 IDE 安装路径为 `"E:\apps\JetBrains`，则向该文件添加内容：
+
+```json
+{
+    "install_location": "E:\\apps\\JetBrains",
+    // others ...
+}
+```
 
 ## Node.js
 
@@ -91,6 +108,12 @@ npm config set registry http://registry.npmmirror.com
 npm install -g pnpm
 ```
 
+最好为 pnpm 设置 store，如设置为 `E:\data\pnpm-store`。
+
+```
+pnpm config set store-dir E:\data\pnpm-store
+```
+
 - [antfu/ni](https://github.com/antfu/ni) 可以便捷切换使用的包管理器
 
 ```bash
@@ -123,6 +146,66 @@ java -version
 javac -version
 javap -version
 ```
+
+## Python
+
+使用 [Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) 来安装 Python。
+
+## Powershell
+
+下载安装 [PowerShell 7](https://www.microsoft.com/store/apps/9MZ1SNWT0N5D)。
+
+安装 [Terminal-Icons](https://github.com/devblackops/Terminal-Icons) 模块
+
+```powershell
+Install-Module -Name Terminal-Icons -Repository PSGallery
+```
+
+编辑配置文件 `C:\Users\%USERNAME%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`，添加以下内容：
+
+```powershell
+# === antfu/ni ===
+# https://github.com/antfu/ni#conflicts-with-powershell
+Remove-Item Alias:ni -Force -ErrorAction Ignore
+Remove-Item Alias:mi -Force -ErrorAction Ignore
+
+# === inport module === 
+# https://github.com/devblackops/Terminal-Icons#installation
+Import-Module -Name Terminal-Icons
+
+# PSReadLine
+Set-PSReadLineOption -PredictionSource History
+
+
+```
+
+外观配置如下：
+
+| 配置项 | 值 |
+| --- | --- |
+| 颜色主题 | Tango Dark |
+| 字体 | Fira Code |
+| 字体大小 | 11 |
+| 行高 | 1.2 |
+| 背景不透明度 | 85% |
+| 启用亚克力材料 | 是 |
+
+## Apps
+
+- Git [Git for Windows](https://git-scm.com/download/win) & [Git Extensions](https://github.com/gitextensions/gitextensions/releases/latest)
+- 下载工具 [Internet Download Manager](https://www.internetdownloadmanager.com/download.html)
+- 解压缩工具 [Bandizip](https://www.bandisoft.com/bandizip)
+- 视频播放器 [PotPlayer](https://potplayer.daum.net)
+- Markdown 编辑器 [Typora](https://download.typora.io/windows/typora-setup-x64.exe)
+- Office365 安装工具 [Office Tool Plus](https://otp.landian.vip/zh-cn/download.html)
+- 截图工具 [Snipaste](https://www.microsoft.com/store/apps/9P1WXPKB68KX)
+- 快捷启动 [uTools](https://u.tools/download.html)
+- 密码管理 [Keepass 2](https://keepass.info/download.html)
+- 性能监测 [MSI Afterburner](https://www.msi.com/Landing/afterburner)
+- 文本编辑 [Notepad++](https://notepad-plus-plus.org/downloads)
+- 请求调试 [Postman](https://www.postman.com/downloads)
+- MongoDB 客户端 [Studio 3T](https://studio3t.com/download)
+- SSH 客户端 [Termius](https://www.termius.com/windows)
 
 ## Font
 
