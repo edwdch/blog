@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "dist.tar.gz"
-          target: /data/blog-dir
+          target: /home/${{ secrets.USERNAME }}/blog-dir
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v0.1.10
@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /data/blog-dir/
+            cd /home/${{ secrets.USERNAME }}/blog-dir
             mkdir temp
             tar -zxvf dist.tar.gz -C temp
             rm -rf dist/
