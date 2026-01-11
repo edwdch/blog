@@ -4,24 +4,28 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "up": "taze -I --include-locked"
   },
   "dependencies": {
     "@mdx-js/rollup": "^3.1.1",
-    "@tailwindcss/postcss": "4.0.0-alpha.13",
-    "@types/node": "20.11.17",
-    "@types/react": "18.2.55",
-    "@types/react-dom": "18.2.19",
+    "@tailwindcss/postcss": "4.1.18",
+    "@types/node": "25.0.6",
+    "@types/react": "19.2.8",
+    "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
-    "postcss": "^8.4.35",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-router-dom": "^7.12.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
-    "sugar-high": "^0.6.0",
-    "tailwindcss": "4.0.0-alpha.13",
-    "typescript": "^5",
+    "sugar-high": "^0.9.5",
+    "tailwindcss": "4.1.18",
+    "typescript": "^5.9.3",
     "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "taze": "^19.9.2"
   }
 }

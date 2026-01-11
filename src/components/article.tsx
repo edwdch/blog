@@ -20,7 +20,7 @@ export function ArticleLayout({
 
   return (
     <section>
-      <h1 className="title font-semibold text-2xl tracking-tighter">{title}</h1>
+      <h1 className="title font-semibold text-2xl tracking-tighter text-neutral-900 dark:text-neutral-100">{title}</h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(publishedAt)}

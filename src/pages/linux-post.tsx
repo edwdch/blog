@@ -23,7 +23,7 @@ export default function LinuxPostPage() {
   if (!slug || !postsBySlug[slug]) {
     return (
       <section>
-        <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+        <h1 className="mb-8 text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
           404 - Post Not Found
         </h1>
       </section>
