@@ -335,3 +335,19 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
+
+/* ===== 图片点击预览样式 ===== */
+/* 深色模式下的遮罩背景 */
+.dark [data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 图片缩放时的光标样式 */
+[data-rmiz-btn-unzoom],
+[data-rmiz-btn-zoom] {
+  cursor: zoom-in;
+}
+
+[data-rmiz-btn-unzoom] {
+  cursor: zoom-out;
+}
