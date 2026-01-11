@@ -1,5 +1,8 @@
-// 从 MDX 文件导入 frontmatter
-import { frontmatter as gettingStartedFrontmatter } from 'app/linux/(posts)/getting-started/content.mdx'
+// 使用 Vite 的 import.meta.glob 动态导入所有 MDX 文件的 frontmatter
+const linuxPostModules = import.meta.glob('../pages/linux/*.mdx', { eager: true }) as Record<
+  string,
+  { frontmatter: PostMetadata }
+>
 
 export type PostMetadata = {
   title: string
@@ -16,10 +19,14 @@ export type Post = {
 // Blog 文章列表
 export const blogPosts: Post[] = []
 
-// Linux 文章列表
-export const linuxPosts: Post[] = [
-  { slug: 'getting-started', metadata: gettingStartedFrontmatter },
-]
+// Linux 文章列表 - 从 MDX 文件动态生成
+export const linuxPosts: Post[] = Object.entries(linuxPostModules).map(([path, module]) => {
+  const slug = path.replace('../pages/linux/', '').replace('.mdx', '')
+  return {
+    slug,
+    metadata: module.frontmatter,
+  }
+})
 
 export function getBlogPosts() {
   return blogPosts
