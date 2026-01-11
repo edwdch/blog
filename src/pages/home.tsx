@@ -9,7 +9,7 @@ export default function HomePage() {
       </p>
       <p className="mb-4 text-neutral-700 dark:text-neutral-300">
         出于自己的需求，我总结了一个<a
-          href="/linux/getting-started"
+          href="/linux/remote-dev-in-browser"
           className="text-blue-600 dark:text-blue-400"
         >基于浏览器的远程开发解决方案</a> 。从头开始配置，如果你也有类似需求，可以参考系列文章总结自己的解决方案。
       </p>
