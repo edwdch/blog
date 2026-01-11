@@ -9,6 +9,11 @@ icon: 'authelia.svg'
 
 使用 Nginx auth basic 进行简单的用户名密码验证虽然方便，但是不支持 SSO（单点登录），用户体验较差。Authelia 是一个开源的身份验证和授权服务器，支持多种认证方式（如双因素认证），并且可以与 Nginx 集成，实现更安全和灵活的访问控制。
 
+## 前置要求
+
+1. 阅读 [Linux 服务器起步配置](/linux/getting-started)，确保 Docker 正常运行，并且按照文档组织好你的目录结构。
+2. 阅读 [Nginx 部署与配置](/linux/nginx)，确保你已经有一个运行中的 Nginx 服务器，并且配置好 SSL 证书。
+
 ## 工作原理
 
 Authelia 作为一个独立的服务运行，负责处理用户的身份验证请求。当用户尝试访问受保护的资源时，Nginx 会将请求转发给 Authelia 进行验证。Authelia 会根据配置的策略决定是否允许访问，并返回相应的响应给 Nginx。
@@ -137,9 +142,14 @@ users:
 
 配置了以上账户之后，可以使用用户名 `edward` 和密码 `password1` 登录 Authelia。
 
-## Nginx 集成
+## 启动服务
 
-> 关于 Nginx 的文件组织方式，请参考 [Nginx 部署与配置](/linux/nginx)。
+```bash
+cd /data/docker/authelia
+docker-compose up -d
+```
+
+## Nginx 集成
 
 我们新增一个 snippet 文件 `/etc/nginx/snippets/authelia.conf`，内容如下：
 
