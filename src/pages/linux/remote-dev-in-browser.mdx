@@ -33,3 +33,17 @@ icon: 'chrome.webp'
 
 如果你有公网 IP，阅读 <PostLink href="./gost" /> 来配置 HTTPS 代理，这样你在外网就可以通过 `Proxy SwitchyOmega` 插件配置代理来访问你的内网开发环境。
 
+## DNS 配置
+
+假设你有一个域名 `example.com`，我建议你为每个服务都配置一个子域名。
+
+首先是内网的 DNS 解析，先给 linux 服务器 IP 配置一个内网域名 `dev.example.com`，然后给每个服务配置子域名：
+
+| 服务       | 子域名                     | 类型 | 指向       |
+| ---------- | -------------------------- | ---- | ----------- |
+| Linux | dev.example.com       | A    | 内网 IP |
+| Gost | gost.example.com      | A | 公网 IP |
+| VS Code    | code.example.com     | CNAME| dev.example.com |
+| Apache Guacamole | rdp.example.com      | CNAME| dev.example.com |
+| Authelia  | auth.example.com     | CNAME| dev.example.com |
+| TTYD       | console.example.com  | CNAME| dev.example.com |
