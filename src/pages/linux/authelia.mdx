@@ -8,14 +8,14 @@ benefits:
   - SSO 单点登录
 ---
 
+<DocRefList>
+  <DocRef path="getting-started" />
+  <DocRef path="nginx" />
+</DocRefList>
+
 家庭内网中的服务如果需要向外网开放，通常会面临安全性的问题，所以鉴权是一个重要的环节。
 
 使用 Nginx auth basic 进行简单的用户名密码验证虽然方便，但是不支持 SSO（单点登录），用户体验较差。Authelia 是一个开源的身份验证和授权服务器，支持多种认证方式（如双因素认证），并且可以与 Nginx 集成，实现更安全和灵活的访问控制。
-
-## 前置要求
-
-1. 阅读 [Linux 服务器起步配置](/linux/getting-started)，确保 Docker 正常运行，并且按照文档组织好你的目录结构。
-2. 阅读 [Nginx 部署与配置](/linux/nginx)，确保你已经有一个运行中的 Nginx 服务器，并且配置好 SSL 证书。
 
 ## 工作原理
 
