@@ -65,7 +65,7 @@ function SystemIcon() {
 }
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleThemeWithTransition } = useTheme()
 
   const getIcon = () => {
     if (theme === 'light') return <SunIcon />
@@ -81,7 +81,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={toggleThemeWithTransition}
       className="flex items-center gap-2 px-2 py-1 rounded-md transition-all hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
       aria-label={`当前主题: ${getLabel()}，点击切换`}
       title={getLabel()}

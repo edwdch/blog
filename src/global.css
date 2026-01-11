@@ -150,6 +150,64 @@ input[type='email'] {
   appearance: none;
 }
 
+/* ===== 主题切换动画 ===== */
+
+/* 动画 CSS 变量 */
+:root {
+  --theme-transition-x: 50%;
+  --theme-transition-y: 50%;
+  --theme-transition-radius: 100vmax;
+}
+
+/* 禁用 View Transition 默认的淡入淡出效果 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* ===== 从亮到暗的切换动画 ===== */
+/* 新视图（暗色）从点击位置圆形扩散展开 */
+.theme-transition-light-to-dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+.theme-transition-light-to-dark::view-transition-new(root) {
+  z-index: 9999;
+  animation: theme-expand-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ===== 从暗到亮的切换动画 ===== */
+/* 旧视图（暗色）从点击位置圆形收缩消失 */
+.theme-transition-dark-to-light::view-transition-old(root) {
+  z-index: 9999;
+  animation: theme-shrink-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.theme-transition-dark-to-light::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* 圆形扩散展开动画 */
+@keyframes theme-expand-in {
+  from {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(var(--theme-transition-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
+/* 圆形收缩消失动画 */
+@keyframes theme-shrink-out {
+  from {
+    clip-path: circle(var(--theme-transition-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
 table {
   display: block;
   max-width: fit-content;
