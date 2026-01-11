@@ -28,7 +28,11 @@ export function ArticleLayout({
           <img 
             src={`/icons/${icon}`} 
             alt="" 
-            className="w-8 h-8 object-contain" 
+            className="w-8 h-8 object-contain flex-shrink-0" 
+            onError={(e) => {
+              console.error('Icon failed to load:', icon)
+              e.currentTarget.style.display = 'none'
+            }}
           />
         )}
         {title}
