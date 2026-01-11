@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { ArticleLayout } from 'app/components/article'
 import { mdxComponents } from 'app/lib/mdx-components'
 
@@ -20,6 +21,21 @@ for (const path in posts) {
 
 export default function LinuxPostPage() {
   const { slug } = useParams<{ slug: string }>()
+  const location = useLocation()
+
+  // 处理 hash 锚点跳转
+  useEffect(() => {
+    if (location.hash) {
+      // 延迟执行，确保内容已渲染
+      setTimeout(() => {
+        const id = decodeURIComponent(location.hash.slice(1))
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [location.hash, slug])
 
   if (!slug || !postsBySlug[slug]) {
     return (
