@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { formatDate, getLinuxPosts } from 'app/linux/utils'
+import { formatDate, getLinuxPosts } from 'app/lib/posts'
 
 export function LinuxPosts() {
   let allPosts = getLinuxPosts()
