@@ -1,42 +1,44 @@
-# Portfolio Blog Starter
+# Edward's Blog
 
-This is a porfolio site template complete with a blog. Includes:
+个人技术博客，记录 Linux 服务器运维、自托管服务部署等技术笔记。
 
-- MDX and Markdown support
-- Optimized for SEO (sitemap, robots, JSON-LD schema)
-- RSS Feed
-- Dynamic OG images
-- Syntax highlighting
-- Tailwind v4
-- Vercel Speed Insights / Web Analytics
-- Geist font
+## 技术栈
 
-## Demo
+- **框架**: React 19 + Vite 7
+- **语言**: TypeScript
+- **样式**: Tailwind CSS v4
+- **内容**: MDX
+- **路由**: React Router
+- **代码高亮**: Shiki + Rehype Pretty Code
+- **部署**: Vercel
 
-https://portfolio-blog-starter.vercel.app
-
-## How to Use
-
-You can choose from one of the following two methods to use this repository:
-
-### One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/blog&project-name=blog&repository-name=blog)
-
-### Clone and Deploy
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
+## 本地开发
 
 ```bash
-pnpm create next-app --example https://github.com/vercel/examples/tree/main/solutions/blog blog
-```
+# 安装依赖
+pnpm install
 
-Then, run Next.js in development mode:
-
-```bash
+# 启动开发服务器
 pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 预览生产版本
+pnpm preview
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/templates) ([Documentation](https://nextjs.org/docs/app/building-your-application/deploying)).
+## 目录结构
+
+```
+src/
+├── components/     # React 组件
+├── lib/            # 工具函数
+├── pages/          # 页面组件
+│   └── linux/      # Linux 相关文章 (MDX)
+public/             # 静态资源
+```
+
+## 文章分类
+
+- **Linux**: 服务器配置、自托管服务部署教程
