@@ -7,37 +7,39 @@
   color: #fefefe;
 }
 
-:root {
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
-}
-
 /* 深色模式样式 - 通过 class 切换 */
 .dark {
-  --sh-class: #4c97f8;
-  --sh-identifier: white;
-  --sh-keyword: #f47067;
-  --sh-string: #0fa295;
   color-scheme: dark;
 }
 
 /* 系统偏好深色模式（当没有手动设置时） */
 @media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
-  }
   html:not(.light) {
     color-scheme: dark;
+  }
+}
+
+/* rehype-pretty-code 双主题切换 */
+/* 亮色模式下使用 light 主题颜色 */
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+/* 暗色模式下使用 dark 主题颜色 */
+.dark code[data-theme*=' '],
+.dark code[data-theme*=' '] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* 系统偏好暗色模式 */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) code[data-theme*=' '],
+  html:not(.light) code[data-theme*=' '] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 }
 
@@ -53,6 +55,14 @@ html {
   width: 80%;
   max-width: 700px;
   cursor: pointer;
+}
+
+.prose .anchor {
+  @apply text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400;
+}
+
+.prose .anchor svg {
+  @apply inline-block w-4 h-4;
 }
 
 .anchor:hover {
@@ -73,17 +83,55 @@ html {
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-4 px-4 text-sm my-4;
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-sm;
 }
 
 .prose pre code {
-  @apply p-0;
+  @apply p-0 bg-transparent;
   border: initial;
   line-height: 1.5;
+}
+
+/* rehype-pretty-code 样式 */
+.prose pre > code {
+  display: grid;
+}
+
+.prose pre [data-line] {
+  @apply px-4 border-l-2 border-transparent;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.prose pre [data-highlighted-line] {
+  @apply bg-neutral-200/50 dark:bg-neutral-700/50 border-l-blue-500;
+}
+
+.prose pre [data-highlighted-chars] {
+  @apply bg-neutral-300/50 dark:bg-neutral-600/50 rounded px-1;
+}
+
+.prose pre [data-line-numbers] {
+  counter-reset: line;
+}
+
+.prose pre [data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-4 mr-4 text-right text-neutral-400;
+}
+
+/* 代码块标题/文件名 */
+.prose [data-rehype-pretty-code-title] {
+  @apply text-sm font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-t-lg border border-b-0 border-neutral-200 dark:border-neutral-700;
+}
+
+.prose [data-rehype-pretty-code-title] + pre {
+  @apply rounded-t-none mt-0;
 }
 
 .prose code span {
@@ -125,6 +173,63 @@ html {
 
 .prose ol {
   @apply list-decimal pl-6;
+}
+
+/* GFM 任务列表样式 */
+.prose ul.contains-task-list {
+  @apply list-none pl-0;
+}
+
+.prose li.task-list-item {
+  @apply flex items-start gap-2;
+}
+
+.prose li.task-list-item input[type="checkbox"] {
+  @apply mt-1.5 h-4 w-4 rounded border-neutral-300 dark:border-neutral-600;
+}
+
+/* GFM 表格样式 */
+.prose table {
+  @apply w-full border-collapse text-sm my-4;
+  display: table;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: normal;
+}
+
+.prose thead {
+  @apply border-b border-neutral-300 dark:border-neutral-700;
+}
+
+.prose th {
+  @apply px-4 py-2 text-left font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.prose td {
+  @apply px-4 py-2 border-b border-neutral-200 dark:border-neutral-800;
+}
+
+.prose tbody tr:hover {
+  @apply bg-neutral-50 dark:bg-neutral-900/50;
+}
+
+/* GFM 删除线 */
+.prose del {
+  @apply text-neutral-500 dark:text-neutral-400;
+}
+
+/* 引用块样式增强 */
+.prose blockquote {
+  @apply border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic text-neutral-600 dark:text-neutral-400 my-4;
+}
+
+.prose blockquote p {
+  @apply my-2;
+}
+
+/* 分割线样式 */
+.prose hr {
+  @apply border-neutral-200 dark:border-neutral-800 my-8;
 }
 
 .prose > :first-child {
@@ -208,13 +313,25 @@ input[type='email'] {
   }
 }
 
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
 .title {
   text-wrap: balance;
+}
+
+/* ===== 目录样式 ===== */
+.toc {
+  @apply p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800;
+}
+
+.toc a {
+  @apply no-underline;
+}
+
+.toc ul {
+  @apply list-none p-0 m-0;
+}
+
+/* 滚动行为优化 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }

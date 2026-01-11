@@ -1,4 +1,5 @@
 import { formatDate } from 'app/lib/posts'
+import { TableOfContents, useToc } from './toc'
 
 type ArticleLayoutProps = {
   children: React.ReactNode
@@ -17,9 +18,10 @@ export function ArticleLayout({
   frontmatter,
 }: ArticleLayoutProps) {
   const { title, publishedAt } = frontmatter
+  const tocItems = useToc()
 
   return (
-    <section>
+    <section className="relative">
       <h1 className="title font-semibold text-2xl tracking-tighter text-neutral-900 dark:text-neutral-100">{title}</h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -27,6 +29,10 @@ export function ArticleLayout({
         </p>
       </div>
       <article className="prose">{children}</article>
+      {/* 侧边栏目录 - 固定在文章左侧，不占用主内容宽度 */}
+      <aside className="hidden xl:block fixed top-24 left-[max(1rem,calc(50%-336px-14rem-2rem))] w-56 max-h-[calc(100vh-8rem)] overflow-y-auto">
+        <TableOfContents items={tocItems} />
+      </aside>
     </section>
   )
 }
