@@ -1,5 +1,5 @@
 ---
-title: 'VS Code Server'
+title: 'VS Code Server 部署与配置'
 publishedAt: '2026-01-11'
 priority: 4
 icon: 'vscode.png'
@@ -91,7 +91,7 @@ server {
 }
 ```
 
-## 注意事项
+## 注意更新
 
 VS Code Server 每次启动时都会检查并更新服务端，有些情况下可能会出现客户端和服务端版本不一致导致无法访问的问题，这时候需要更新客户端。
 
@@ -99,3 +99,17 @@ VS Code Server 每次启动时都会检查并更新服务端，有些情况下�
 sudo apt update
 sudo apt upgrade code
 ```
+
+## PATH 配置
+
+不管你使用 Node.js 还是 Go，为了让 VS Code 能够正确识别命令行工具的路径，你需要修改 `/etc/systemd/system/code-server.service` 文件中的 `Environment` 字段，添加相应的路径。
+
+例如，你是用了 `nvm` 安装了 v20.18.3 版本的 Node.js，假设该版本的路径是 `/root/.nvm/versions/node/v20.18.3/bin`，那么你需要把这个路径添加到 `PATH` 环境变量中。
+
+```ini
+Environment="PATH=/root/.nvm/versions/node/v20.18.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+```
+
+该路径后面还跟了系统默认的 `PATH`，以确保其他命令行工具也能被正确识别。
+
+如果缺失了这一步，VS Code 自带的 debug 功能将无法正常工作。
