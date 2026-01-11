@@ -8,6 +8,9 @@ const navItems = {
   '/linux': {
     name: 'Linux',
   },
+  '/ios': {
+    name: 'iOS',
+  },
 }
 
 export function Navbar() {

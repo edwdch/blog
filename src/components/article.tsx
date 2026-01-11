@@ -11,7 +11,7 @@ type ArticleLayoutProps = {
     image?: string
   }
   slug: string
-  section: 'blog' | 'linux'
+  section: 'linux' | 'ios'
 }
 
 export function ArticleLayout({

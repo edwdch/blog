@@ -3,6 +3,10 @@ const linuxPostModules = import.meta.glob('../pages/linux/*.mdx', { eager: true 
   string,
   { frontmatter: PostMetadata }
 >
+const iosPostModules = import.meta.glob('../pages/ios/*.mdx', { eager: true }) as Record<
+  string,
+  { frontmatter: PostMetadata }
+>
 
 export type PostMetadata = {
   title: string
@@ -18,17 +22,33 @@ export type Post = {
   metadata: PostMetadata
 }
 
-// Linux 文章列表 - 从 MDX 文件动态生成
-export const linuxPosts: Post[] = Object.entries(linuxPostModules).map(([path, module]) => {
-  const slug = path.replace('../pages/linux/', '').replace('.mdx', '')
-  return {
-    slug,
-    metadata: module.frontmatter,
-  }
-})
+export type Section = 'linux' | 'ios'
 
+// 通用函数：从模块生成文章列表
+function createPosts(modules: Record<string, { frontmatter: PostMetadata }>, section: string): Post[] {
+  return Object.entries(modules).map(([path, module]) => {
+    const slug = path.replace(`../pages/${section}/`, '').replace('.mdx', '')
+    return {
+      slug,
+      metadata: module.frontmatter,
+    }
+  })
+}
+
+// 各 section 的文章列表
+const postsBySection: Record<Section, Post[]> = {
+  linux: createPosts(linuxPostModules, 'linux'),
+  ios: createPosts(iosPostModules, 'ios'),
+}
+
+// 通用获取函数
+export function getPosts(section: Section): Post[] {
+  return postsBySection[section] || []
+}
+
+// 保持向后兼容
 export function getLinuxPosts() {
-  return linuxPosts
+  return getPosts('linux')
 }
 
 export function formatDate(date: string, includeRelative = false) {

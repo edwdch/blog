@@ -3,8 +3,8 @@ import { ThemeProvider } from 'next-themes'
 import { Navbar } from './components/nav'
 import Footer from './components/footer'
 import HomePage from './pages/home'
-import LinuxPage from './pages/linux'
-import LinuxPostPage from './pages/linux-post'
+import SectionPage from './pages/section'
+import SectionPostPage from './pages/section-post'
 import NotFound from './pages/not-found'
 
 export default function App() {
@@ -15,8 +15,10 @@ export default function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/linux" element={<LinuxPage />} />
-            <Route path="/linux/:slug" element={<LinuxPostPage />} />
+            <Route path="/linux" element={<SectionPage section="linux" title="Linux" />} />
+            <Route path="/linux/:slug" element={<SectionPostPage section="linux" />} />
+            <Route path="/ios" element={<SectionPage section="ios" title="iOS" />} />
+            <Route path="/ios/:slug" element={<SectionPostPage section="ios" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
