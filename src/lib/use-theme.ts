@@ -1,52 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
-
-type Theme = 'light' | 'dark' | 'system'
-
-function getIsDark(theme: Theme): boolean {
-  if (theme === 'dark') return true
-  if (theme === 'light') return false
-  return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-}
+import { useTheme as useNextTheme } from 'next-themes'
+import { useCallback } from 'react'
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as Theme) || 'system'
-    }
-    return 'system'
-  })
-
-  const applyTheme = useCallback((newTheme: Theme) => {
-    const root = document.documentElement
-    if (newTheme === 'dark') {
-      root.classList.add('dark')
-    } else if (newTheme === 'light') {
-      root.classList.remove('dark')
-    } else {
-      // system
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        root.classList.add('dark')
-      } else {
-        root.classList.remove('dark')
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    applyTheme(theme)
-    localStorage.setItem('theme', theme)
-
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = () => {
-      if (theme === 'system') {
-        applyTheme('system')
-      }
-    }
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [theme, applyTheme])
+  const { theme, setTheme, resolvedTheme } = useNextTheme()
 
   // 带动画的主题切换
   const toggleThemeWithTransition = useCallback(async (
@@ -58,8 +14,8 @@ export function useTheme() {
       return 'light'
     })()
 
-    const currentIsDark = getIsDark(theme)
-    const nextIsDark = getIsDark(nextTheme)
+    const currentIsDark = resolvedTheme === 'dark'
+    const nextIsDark = nextTheme === 'dark' || (nextTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
     
     // 如果明暗状态没有变化，直接切换
     if (currentIsDark === nextIsDark) {
@@ -110,17 +66,18 @@ export function useTheme() {
         'theme-transition-light-to-dark'
       )
     }
-  }, [theme, setTheme])
+  }, [theme, setTheme, resolvedTheme])
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      if (prev === 'light') return 'dark'
-      if (prev === 'dark') return 'system'
+    const nextTheme = (() => {
+      if (theme === 'light') return 'dark'
+      if (theme === 'dark') return 'system'
       return 'light'
-    })
+    })()
+    setTheme(nextTheme)
   }
 
-  const isDark = getIsDark(theme)
+  const isDark = resolvedTheme === 'dark'
 
   return { theme, setTheme, toggleTheme, toggleThemeWithTransition, isDark }
 }
