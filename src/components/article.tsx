@@ -6,7 +6,7 @@ type ArticleLayoutProps = {
   frontmatter: {
     title: string
     publishedAt: string
-    summary?: string
+    priority?: number
     image?: string
   }
   slug: string

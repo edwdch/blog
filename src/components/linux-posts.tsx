@@ -8,6 +8,13 @@ export function LinuxPosts() {
     <div>
       {allPosts
         .sort((a, b) => {
+          // 先按 priority 排序（升序），priority 越小越靠前
+          const aPriority = a.metadata.priority ?? Infinity
+          const bPriority = b.metadata.priority ?? Infinity
+          if (aPriority !== bPriority) {
+            return aPriority - bPriority
+          }
+          // priority 相同时按发布日期排序（降序）
           if (
             new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
           ) {

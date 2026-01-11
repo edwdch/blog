@@ -5,7 +5,7 @@ declare module '*.mdx' {
   export const frontmatter: {
     title: string
     publishedAt: string
-    summary: string
+    priority?: number
     image?: string
   }
   const MDXComponent: ComponentType

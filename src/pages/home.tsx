@@ -1,5 +1,3 @@
-import { BlogPosts } from 'app/components/posts'
-
 export default function HomePage() {
   return (
     <section>
@@ -17,9 +15,6 @@ export default function HomePage() {
           《Linux 服务器起步配置》
         </a> 。我几乎从零开始搭建了一个远程开发环境，并分享了我的经验和教训。
       </p>
-      <div className="my-8">
-        <BlogPosts />
-      </div>
     </section>
   )
 }

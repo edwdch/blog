@@ -7,7 +7,7 @@ const linuxPostModules = import.meta.glob('../pages/linux/*.mdx', { eager: true 
 export type PostMetadata = {
   title: string
   publishedAt: string
-  summary: string
+  priority?: number
   image?: string
 }
 
@@ -15,9 +15,6 @@ export type Post = {
   slug: string
   metadata: PostMetadata
 }
-
-// Blog 文章列表
-export const blogPosts: Post[] = []
 
 // Linux 文章列表 - 从 MDX 文件动态生成
 export const linuxPosts: Post[] = Object.entries(linuxPostModules).map(([path, module]) => {
@@ -27,10 +24,6 @@ export const linuxPosts: Post[] = Object.entries(linuxPostModules).map(([path, m
     metadata: module.frontmatter,
   }
 })
-
-export function getBlogPosts() {
-  return blogPosts
-}
 
 export function getLinuxPosts() {
   return linuxPosts
