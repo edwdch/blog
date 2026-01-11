@@ -8,6 +8,7 @@ export type PostMetadata = {
   title: string
   publishedAt: string
   priority?: number
+  icon?: string
   image?: string
 }
 

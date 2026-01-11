@@ -6,6 +6,7 @@ declare module '*.mdx' {
     title: string
     publishedAt: string
     priority?: number
+    icon?: string
     image?: string
   }
   const MDXComponent: ComponentType
