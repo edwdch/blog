@@ -190,6 +190,24 @@ proxy_set_header Remote-Name $name;
 proxy_set_header Remote-Email $email;
 ```
 
+新增一个 `/etc/nginx/conf.d/authelia.conf` 文件，内容如下：
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name auth.example.com;
+    include /etc/nginx/example.com_ssl.conf;
+
+    location / {
+        # 转发给本地运行的 Docker 容器
+        proxy_pass http://127.0.0.1:9091;
+        
+        include /etc/nginx/snippets/proxy-headers.conf;
+        include /etc/nginx/snippets/websocket.conf;
+    }
+}
+```
+
 在需要认证的 server{} 里引入这个 snippet：
 
 ```nginx
