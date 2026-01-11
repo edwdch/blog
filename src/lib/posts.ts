@@ -10,6 +10,7 @@ export type PostMetadata = {
   priority?: number
   icon?: string
   image?: string
+  benefits?: string[]
 }
 
 export type Post = {

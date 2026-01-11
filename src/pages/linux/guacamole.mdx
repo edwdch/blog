@@ -5,15 +5,17 @@ priority: 5
 icon: 'guacamole.png'
 ---
 
+import { DocRef, DocRefList } from 'app/components/doc-ref'
+
+<DocRefList>
+  <DocRef path="getting-started" />
+  <DocRef path="nginx" />
+  <DocRef path="authelia" />
+</DocRefList>
+
 Apache Guacamole 是一个 HTML5 远程桌面网关，支持 VNC、RDP 和 SSH 协议。它可以让你通过浏览器访问远程服务器，而不需要安装客户端。
 
 本文介绍如何在 Linux 上部署 guacamole，并通过 RDP 连接局域网内的 Windows 服务器。理论上也可以连接互联网上的 Windows 服务器，但是需要注意安全问题。
-
-## 前置要求
-
-1. 阅读 [Linux 服务器起步配置](/linux/getting-started)，确保 Docker 正常运行，并且按照文档组织好你的目录结构。
-2. 阅读 [Nginx 部署与配置](/linux/nginx)，确保你已经有一个运行中的 Nginx 服务器，并且配置好 SSL 证书。
-3. 一台 Windows 机器，开启了 RDP 服务。
 
 ## 配置 Guacamole
 
@@ -138,6 +140,7 @@ server {
     server_name rdp.example.com;
 
     include /etc/nginx/snippets/ssl.conf;
+    include /etc/nginx/snippets/authelia.conf;
 
     location = / {
         return 301 /guacamole;

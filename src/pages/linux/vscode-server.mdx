@@ -4,6 +4,13 @@ publishedAt: '2026-01-11'
 priority: 4
 icon: 'vscode.png'
 ---
+import { DocRef, DocRefList } from 'app/components/doc-ref'
+
+<DocRefList>
+  <DocRef path="getting-started" />
+  <DocRef path="nginx" />
+  <DocRef path="authelia" />
+</DocRefList>
 
 我们需要在远程服务器上进行开发，这时候就需要一个远程的编辑器。VS Code Server 就是一个基于浏览器的远程编辑器，可以在浏览器中使用 VS Code 的功能。
 
@@ -63,14 +70,7 @@ sudo systemctl start code-server
 
 ## Nginx 配置
 
-在 HTTP 环境下，VS Code 的部分功能将受到限制。建议使用 Nginx 反向代理 VS Code Server，添加 HTTPS 支持和 Basic Auth 认证。
-
-这里使用 htpasswd 生成一个密码文件。账号为 `coder`，密码为 `coder_pass`，并将文件移动到 `/etc/nginx/`。
-
-```bash
-htpasswd -bc ./passwd coder coder_pass
-sudo mv ./passwd /etc/nginx/
-```
+在 HTTP 环境下，VS Code 的部分功能将受到限制。建议使用 Nginx 反向代理 VS Code Server，添加 HTTPS 支持。
 
 添加 Nginx 配置文件 `/etc/nginx/conf.d/code-server.conf`。
 
@@ -79,10 +79,8 @@ server {
     listen 443 ssl;
     server_name code.example.com;
 
-    auth_basic "Restricted Area";
-    auth_basic_user_file /etc/nginx/.htpasswd;
-
     include /etc/nginx/snippets/example.com-ssl.conf;
+    include /etc/nginx/snippets/authelia.conf;
 
     location / {
         proxy_pass http://localhost:8886;
@@ -92,8 +90,6 @@ server {
     }
 }
 ```
-
-> 代码里用到的 `example.com-ssl.conf`, `proxy-headers.conf` 和 `websocket.conf` 片段配置请参考 [Nginx 章节](./nginx#片段配置)。
 
 ## 注意事项
 
