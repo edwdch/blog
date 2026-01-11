@@ -3,7 +3,7 @@ const linuxPostModules = import.meta.glob('../pages/linux/*.mdx', { eager: true 
   string,
   { frontmatter: PostMetadata }
 >
-const iosPostModules = import.meta.glob('../pages/ios/*.mdx', { eager: true }) as Record<
+const applePostModules = import.meta.glob('../pages/apple/*.mdx', { eager: true }) as Record<
   string,
   { frontmatter: PostMetadata }
 >
@@ -22,7 +22,7 @@ export type Post = {
   metadata: PostMetadata
 }
 
-export type Section = 'linux' | 'ios'
+export type Section = 'linux' | 'apple'
 
 // 通用函数：从模块生成文章列表
 function createPosts(modules: Record<string, { frontmatter: PostMetadata }>, section: string): Post[] {
@@ -38,7 +38,7 @@ function createPosts(modules: Record<string, { frontmatter: PostMetadata }>, sec
 // 各 section 的文章列表
 const postsBySection: Record<Section, Post[]> = {
   linux: createPosts(linuxPostModules, 'linux'),
-  ios: createPosts(iosPostModules, 'ios'),
+  apple: createPosts(applePostModules, 'apple'),
 }
 
 // 通用获取函数

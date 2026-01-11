@@ -10,8 +10,8 @@ const linuxPosts: Record<string, { default: React.ComponentType; frontmatter: an
   { eager: true }
 ) as any
 
-const iosPosts: Record<string, { default: React.ComponentType; frontmatter: any }> = import.meta.glob(
-  './ios/*.mdx',
+const applePosts: Record<string, { default: React.ComponentType; frontmatter: any }> = import.meta.glob(
+  './apple/*.mdx',
   { eager: true }
 ) as any
 
@@ -38,7 +38,7 @@ function createPostsBySlug(
 
 const postsBySection: Record<Section, Record<string, PostData>> = {
   linux: createPostsBySlug(linuxPosts, 'linux'),
-  ios: createPostsBySlug(iosPosts, 'ios'),
+  apple: createPostsBySlug(applePosts, 'apple'),
 }
 
 type SectionPostPageProps = {

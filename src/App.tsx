@@ -17,8 +17,8 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/linux" element={<SectionPage section="linux" title="Linux" />} />
             <Route path="/linux/:slug" element={<SectionPostPage section="linux" />} />
-            <Route path="/ios" element={<SectionPage section="ios" title="iOS" />} />
-            <Route path="/ios/:slug" element={<SectionPostPage section="ios" />} />
+            <Route path="/apple" element={<SectionPage section="apple" title="Apple" />} />
+            <Route path="/apple/:slug" element={<SectionPostPage section="apple" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

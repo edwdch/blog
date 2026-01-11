@@ -8,8 +8,8 @@ const navItems = {
   '/linux': {
     name: 'Linux',
   },
-  '/ios': {
-    name: 'iOS',
+  '/apple': {
+    name: 'Apple',
   },
 }
 
