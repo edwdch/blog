@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { ArticleLayout } from 'app/components/article'
+import { mdxComponents } from 'app/lib/mdx-components'
 
 // 动态导入 MDX 内容
 const posts: Record<string, { default: React.ComponentType; frontmatter: any }> = import.meta.glob(
@@ -8,7 +9,7 @@ const posts: Record<string, { default: React.ComponentType; frontmatter: any }> 
 ) as any
 
 // 重新映射：从路径提取 slug
-const postsBySlug: Record<string, { Content: React.ComponentType; frontmatter: any }> = {}
+const postsBySlug: Record<string, { Content: React.ComponentType<{ components?: typeof mdxComponents }>; frontmatter: any }> = {}
 for (const path in posts) {
   const slug = path.replace('./linux/', '').replace('.mdx', '')
   postsBySlug[slug] = {
@@ -34,7 +35,7 @@ export default function LinuxPostPage() {
 
   return (
     <ArticleLayout frontmatter={frontmatter} slug={slug} section="linux">
-      <Content />
+      <Content components={mdxComponents} />
     </ArticleLayout>
   )
 }
