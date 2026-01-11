@@ -23,7 +23,7 @@ export function ArticleLayout({
 
   return (
     <section className="relative">
-      <h1 className="title font-semibold text-2xl tracking-tighter text-neutral-900 dark:text-neutral-100 flex items-center gap-1">
+      <h1 className="title font-semibold text-2xl tracking-tighter text-neutral-900 dark:text-neutral-100 flex items-center gap-3">
         {icon && (
           <img 
             src={`/icons/${icon}`} 
