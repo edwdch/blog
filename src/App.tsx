@@ -6,6 +6,7 @@ import HomePage from './pages/home'
 import SectionPage from './pages/section'
 import SectionPostPage from './pages/section-post'
 import NotFound from './pages/not-found'
+import { Analytics } from "@vercel/analytics/next"
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
+          <Analytics />
         </main>
       </div>
     </ThemeProvider>
