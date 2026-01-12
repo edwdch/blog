@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export type TocItem = {
   id: string
@@ -90,8 +91,12 @@ export function TableOfContents({ items }: TocProps) {
 // 从 DOM 中提取标题生成 TOC
 export function useToc() {
   const [items, setItems] = useState<TocItem[]>([])
+  const location = useLocation()
 
   useEffect(() => {
+    // 切换文章时先清空目录
+    setItems([])
+    
     // 等待 MDX 内容渲染完成
     const timer = setTimeout(() => {
       const article = document.querySelector('article.prose')
@@ -114,7 +119,7 @@ export function useToc() {
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [location.pathname])
 
   return items
 }
