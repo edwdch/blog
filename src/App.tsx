@@ -6,7 +6,7 @@ import HomePage from './pages/home'
 import SectionPage from './pages/section'
 import SectionPostPage from './pages/section-post'
 import NotFound from './pages/not-found'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   return (
