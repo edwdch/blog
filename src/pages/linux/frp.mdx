@@ -2,11 +2,6 @@
 title: 'Frp - 内网穿透简单方案'
 publishedAt: '2026-01-14'
 priority: 5
-variables:
-  domain: example.com
-  frp_token: your_secure_token
-  server_addr: frp.example.com
-  code_domain: code-public.example.com
 ---
 
 <DocRefList>
@@ -14,8 +9,6 @@ variables:
   <DocRef path="nginx" />
   <DocRef path="authelia" />
 </DocRefList>
-
-<Variables />
 
 ## 服务端防火墙
 
@@ -44,7 +37,7 @@ chmod +x /usr/local/bin/frps
 
 ```toml
 bindPort = 7000
-auth.token = "<Var name="frp_token" />"
+auth.token = "your_secure_token"
 ```
 
 > 记得使用 [随机密码生成工具](https://tool.chinaz.com/tools/randompwd) 生成 `auth.token`，以保证安全性
@@ -94,9 +87,9 @@ chmod +x /usr/local/bin/frpc
 新建配置文件 `/data/frp/frpc.toml`，内容如下：
 
 ```toml
-serverAddr = "<Var name="server_addr" />"
+serverAddr = "frp.example.com"
 serverPort = 7000
-auth.token = "<Var name="frp_token" />"
+auth.token = "your_secure_token"
 
 [[proxies]]
 name = "vscode-tcp"
@@ -177,9 +170,9 @@ Jan 13 21:31:50 ubuntu-server frpc[3107491]: 2026-01-13 21:31:50.432 [I] [client
 ```nginx
 server {
     listen 443 ssl;
-    server_name <Var name="code_domain" />;
+    server_name code-public.example.com;
 
-    include /etc/nginx/snippets/<Var name="domain" />-ssl.conf;
+    include /etc/nginx/snippets/example.com-ssl.conf;
     include /etc/nginx/snippets/authelia.conf;
 
     location / {
@@ -191,4 +184,4 @@ server {
 }
 ```
 
-> 注意这里的 `server_name` 使用了 `<Var name="code_domain" />`，你需要提前配置好对应的 DNS 解析
+> 注意这里的 `server_name` 使用了 `code-public.example.com`，你需要提前配置好对应的 DNS 解析

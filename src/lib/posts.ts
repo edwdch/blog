@@ -16,7 +16,6 @@ export type PostMetadata = {
   icon?: string
   image?: string
   benefits?: string[]
-  variables?: Record<string, string>
 }
 
 export type Post = {

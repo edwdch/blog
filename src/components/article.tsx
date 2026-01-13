@@ -1,6 +1,5 @@
 import { formatDate } from 'app/lib/posts'
 import { TableOfContents, useToc } from './toc'
-import { VariablesProvider, VariableDefinition } from 'app/lib/variables-context'
 
 type ArticleLayoutProps = {
   children: React.ReactNode
@@ -11,7 +10,6 @@ type ArticleLayoutProps = {
     priority?: number
     icon?: string
     image?: string
-    variables?: Record<string, string>
   }
   slug: string
   section: 'linux' | 'apple'
@@ -21,18 +19,10 @@ export function ArticleLayout({
   children,
   frontmatter,
 }: ArticleLayoutProps) {
-  const { title, publishedAt, updatedAt, icon, variables } = frontmatter
+  const { title, publishedAt, updatedAt, icon } = frontmatter
   const tocItems = useToc()
 
-  // 将 variables 对象转换为 VariableDefinition 数组
-  const variableDefinitions: VariableDefinition[] = variables
-    ? Object.entries(variables).map(([key, defaultValue]) => ({
-        key,
-        defaultValue,
-      }))
-    : []
-
-  const content = (
+  return (
     <section className="relative">
       <h1 className="title font-semibold text-2xl tracking-tighter text-neutral-900 dark:text-neutral-100 flex items-center gap-3">
         {icon && (
@@ -65,15 +55,4 @@ export function ArticleLayout({
       </aside>
     </section>
   )
-
-  // 如果有变量定义，使用 VariablesProvider 包裹
-  if (variableDefinitions.length > 0) {
-    return (
-      <VariablesProvider definitions={variableDefinitions}>
-        {content}
-      </VariablesProvider>
-    )
-  }
-
-  return content
 }
