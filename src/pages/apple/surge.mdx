@@ -137,10 +137,9 @@ snell-server --wizard -c /data/snell/snell-server.conf
 ```
 > 生成文件时，需要按 `Y` 确认写入该文件
 
-新建 Snell systemd 服务：
+新建 Snell systemd 服务 `/etc/systemd/system/snell-server.service`：
 
-```bash
-cat <<EOF >/etc/systemd/system/snell-server.service
+```ini
 [Unit]
 Description=Snell Proxy Service
 After=network.target
@@ -160,7 +159,6 @@ SyslogIdentifier=snell-server
 
 [Install]
 WantedBy=multi-user.target
-EOF
 ```
 
 加载并启动 Snell 服务：

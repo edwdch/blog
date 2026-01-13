@@ -42,10 +42,9 @@ auth.token = "your_secure_token"
 
 > 记得使用 [随机密码生成工具](https://tool.chinaz.com/tools/randompwd) 生成 `auth.token`，以保证安全性
 
-新建 frp systemd 服务：
+新建 frp systemd 服务 `/etc/systemd/system/frps.service`：
 
-```bash
-cat <<EOF >/etc/systemd/system/frps.service
+```ini
 [Unit]
 Description = frp server
 After = network.target syslog.target
@@ -59,7 +58,6 @@ ExecStart = /usr/local/bin/frps -c /data/frp/frps.toml
 
 [Install]
 WantedBy = multi-user.target
-EOF
 ```
 
 加载并启动 frp 服务：
@@ -115,10 +113,9 @@ remotePort = 11000
 | vscode-tcp  | 将服务器的 8886 端口映射到本地的 8886 端口，用于 VS Code 远程开发 |
 | rdp-tcp     | 将服务器的 11000 端口映射到本地的 11000 端口，用于远程桌面连接 |
 
-新建 frp systemd 服务：
+新建 frp systemd 服务 `/etc/systemd/system/frpc.service`：
 
-```bash
-cat <<EOF >/etc/systemd/system/frpc.service
+```ini
 [Unit]
 Description = frp client
 After = network.target syslog.target
@@ -132,7 +129,6 @@ ExecStart = /usr/local/bin/frpc -c /data/frp/frpc.toml
 
 [Install]
 WantedBy = multi-user.target
-EOF
 ```
 
 加载并启动 frp 服务：
