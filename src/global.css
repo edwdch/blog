@@ -2,6 +2,92 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* 基础背景色 */
+body {
+  background-color: #fafafa;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dark body {
+  background-color: #0a0a0a;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) body {
+    background-color: #0a0a0a;
+  }
+}
+
+/* 丝线装饰 - 左侧 */
+body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M-20 50 Q80 150 30 250 T60 450 T20 650 T80 850' stroke='rgba(180,180,180,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M50 -30 Q120 100 40 200 T90 400 T30 600 T100 800' stroke='rgba(160,160,160,0.2)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M-10 100 Q100 180 60 300 T80 500 T40 700' stroke='rgba(170,170,170,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M80 0 Q150 120 70 240 T110 480 T60 720 T130 900' stroke='rgba(150,150,150,0.15)' fill='none' stroke-width='2'/%3E%3Cpath d='M20 200 Q90 280 50 380 T100 580 T50 780' stroke='rgba(175,175,175,0.2)' fill='none' stroke-width='1'/%3E%3Cpath d='M-30 300 Q60 400 20 500 T70 700 T30 900' stroke='rgba(165,165,165,0.18)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: 200px 800px;
+  background-repeat: repeat-y;
+  mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+}
+
+/* 丝线装饰 - 右侧 */
+body::after {
+  content: '';
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M220 80 Q120 180 170 280 T140 480 T180 680 T120 880' stroke='rgba(180,180,180,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M150 -20 Q80 100 160 200 T110 400 T170 600 T100 800' stroke='rgba(160,160,160,0.2)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M210 120 Q100 200 140 320 T120 520 T160 720' stroke='rgba(170,170,170,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M120 30 Q50 150 130 270 T90 510 T140 750 T70 930' stroke='rgba(150,150,150,0.15)' fill='none' stroke-width='2'/%3E%3Cpath d='M180 220 Q110 300 150 400 T100 600 T150 800' stroke='rgba(175,175,175,0.2)' fill='none' stroke-width='1'/%3E%3Cpath d='M230 320 Q140 420 180 520 T130 720 T170 920' stroke='rgba(165,165,165,0.18)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: 200px 800px;
+  background-repeat: repeat-y;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+}
+
+/* 深色模式丝线 */
+.dark body::before {
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M-20 50 Q80 150 30 250 T60 450 T20 650 T80 850' stroke='rgba(100,100,100,0.35)' fill='none' stroke-width='1'/%3E%3Cpath d='M50 -30 Q120 100 40 200 T90 400 T30 600 T100 800' stroke='rgba(90,90,90,0.25)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M-10 100 Q100 180 60 300 T80 500 T40 700' stroke='rgba(95,95,95,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M80 0 Q150 120 70 240 T110 480 T60 720 T130 900' stroke='rgba(85,85,85,0.2)' fill='none' stroke-width='2'/%3E%3Cpath d='M20 200 Q90 280 50 380 T100 580 T50 780' stroke='rgba(92,92,92,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M-30 300 Q60 400 20 500 T70 700 T30 900' stroke='rgba(88,88,88,0.22)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+.dark body::after {
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M220 80 Q120 180 170 280 T140 480 T180 680 T120 880' stroke='rgba(100,100,100,0.35)' fill='none' stroke-width='1'/%3E%3Cpath d='M150 -20 Q80 100 160 200 T110 400 T170 600 T100 800' stroke='rgba(90,90,90,0.25)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M210 120 Q100 200 140 320 T120 520 T160 720' stroke='rgba(95,95,95,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M120 30 Q50 150 130 270 T90 510 T140 750 T70 930' stroke='rgba(85,85,85,0.2)' fill='none' stroke-width='2'/%3E%3Cpath d='M180 220 Q110 300 150 400 T100 600 T150 800' stroke='rgba(92,92,92,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M230 320 Q140 420 180 520 T130 720 T170 920' stroke='rgba(88,88,88,0.22)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+/* 系统偏好深色模式丝线 */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) body::before {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M-20 50 Q80 150 30 250 T60 450 T20 650 T80 850' stroke='rgba(100,100,100,0.35)' fill='none' stroke-width='1'/%3E%3Cpath d='M50 -30 Q120 100 40 200 T90 400 T30 600 T100 800' stroke='rgba(90,90,90,0.25)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M-10 100 Q100 180 60 300 T80 500 T40 700' stroke='rgba(95,95,95,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M80 0 Q150 120 70 240 T110 480 T60 720 T130 900' stroke='rgba(85,85,85,0.2)' fill='none' stroke-width='2'/%3E%3Cpath d='M20 200 Q90 280 50 380 T100 580 T50 780' stroke='rgba(92,92,92,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M-30 300 Q60 400 20 500 T70 700 T30 900' stroke='rgba(88,88,88,0.22)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+  }
+
+  html:not(.light) body::after {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath d='M220 80 Q120 180 170 280 T140 480 T180 680 T120 880' stroke='rgba(100,100,100,0.35)' fill='none' stroke-width='1'/%3E%3Cpath d='M150 -20 Q80 100 160 200 T110 400 T170 600 T100 800' stroke='rgba(90,90,90,0.25)' fill='none' stroke-width='1.5'/%3E%3Cpath d='M210 120 Q100 200 140 320 T120 520 T160 720' stroke='rgba(95,95,95,0.3)' fill='none' stroke-width='1'/%3E%3Cpath d='M120 30 Q50 150 130 270 T90 510 T140 750 T70 930' stroke='rgba(85,85,85,0.2)' fill='none' stroke-width='2'/%3E%3Cpath d='M180 220 Q110 300 150 400 T100 600 T150 800' stroke='rgba(92,92,92,0.25)' fill='none' stroke-width='1'/%3E%3Cpath d='M230 320 Q140 420 180 520 T130 720 T170 920' stroke='rgba(88,88,88,0.22)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+  }
+}
+
+/* 小屏幕隐藏丝线装饰 */
+@media (max-width: 1024px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
