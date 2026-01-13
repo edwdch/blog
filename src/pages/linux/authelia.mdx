@@ -1,6 +1,7 @@
 ---
 title: 'Authelia - 内网统一认证方案'
 publishedAt: '2026-01-11'
+updatedAt: '2026-01-14'
 priority: 5
 icon: 'authelia.svg'
 benefits:
@@ -68,7 +69,7 @@ services:
 
 ## 基础配置
 
-创建基础配置文件 `/data/docker/authelia/config/configuration.yaml`，然后按照以下的要求来修改配置文件：
+创建基础配置文件 `/data/docker/authelia/config/configuration.yml`，然后按照以下的要求来修改配置文件：
 
 1. 涉及到安全性的密钥（如 session secret、encryption key、jwt secret）**必须随机生成**，推荐使用密码生成工具（如 [站长工具](https://tool.chinaz.com/tools/randompwd)）的密码生成功能来生成这些密钥，确保它们的强度和唯一性。
 2. `example.com` 请替换为你自己的域名。
@@ -149,7 +150,7 @@ users:
 
 ```bash
 cd /data/docker/authelia
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Nginx 集成
