@@ -14,6 +14,12 @@ icon: 'surge.png'
 
 由于国区无法上架，所以 App Store 需要切换到其他区比如美区才能购买。
 
+## 官方网站
+
+[Surge 官方中文指引：理解 Surge 原理](https://manual.nssurge.com/book/understanding-surge/cn/)
+
+[Surge 官方知识库](https://kb.nssurge.com/surge-knowledge-base/zh)
+
 ## 协议支持
 
 需要注意购买的机场是否支持以下协议，如果是自建，可以使用 `Snell`
@@ -104,3 +110,65 @@ TW = smart, include-other-group=All Proxy, update-interval=0, no-alert=0, hidden
 机场3 = smart, policy-path=https://example-3.com, update-interval=0, no-alert=0, hidden=1, include-all-proxies=0
 All Proxy = smart, no-alert=0, hidden=1, include-all-proxies=0, include-other-group="机场1, 机场2, 机场3", icon-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
 ```
+
+## Snell
+
+Snell 是 Surge 独有的协议，如果你使用的是自建服务器，可以考虑使用 Snell 协议。
+
+下载 Snell 服务端:
+
+```bash
+sudo apt install unzip wget -y
+wget https://dl.nssurge.com/snell/snell-server-v5.0.1-linux-amd64.zip -O /tmp/snell-server.zip
+unzip /tmp/snell-server.zip
+mv /tmp/snell-server /usr/local/bin/snell-server
+chmod +x /usr/local/bin/snell-server
+```
+
+> 这里下载的是 5.0.1 的 amd64 版本，需要其他版本可以前往 [Snell 发布页面](https://kb.nssurge.com/surge-knowledge-base/zh/release-notes/snell)
+
+生成 Snell 配置文件：
+
+```bash
+mkdir -p /data/snell
+sudo chown -R nobody:nogroup /data/snell/
+snell-server --wizard -c /data/snell/snell-server.conf
+```
+> 生成文件时，需要按 `Y` 确认写入该文件
+
+新建 Snell systemd 服务：
+
+```bash
+cat <<EOF >/etc/systemd/system/snell-server.service
+[Unit]
+Description=Snell Proxy Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5s
+User=nobody
+Group=nogroup
+LimitNOFILE=51200
+ExecStart=/usr/local/bin/snell-server -c /data/snell/snell-server.conf
+# 允许绑定低位端口 (如 80/443)，如果不需要低位端口可注释掉
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ProtectSystem=full
+SyslogIdentifier=snell-server
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+加载并启动 Snell 服务：
+
+```bash
+systemctl daemon-reload
+systemctl enable snell-server
+systemctl start snell-server
+systemctl status snell-server
+```
+
+在 Surge 中直接使用 Snell 协议连接即可，其中端口和 psk 可以在 `/data/snell/snell-server.conf` 文件中查看。
