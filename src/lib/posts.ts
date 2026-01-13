@@ -11,6 +11,7 @@ const applePostModules = import.meta.glob('../pages/apple/*.mdx', { eager: true 
 export type PostMetadata = {
   title: string
   publishedAt: string
+  updatedAt?: string
   priority?: number
   icon?: string
   image?: string

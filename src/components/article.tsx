@@ -6,6 +6,7 @@ type ArticleLayoutProps = {
   frontmatter: {
     title: string
     publishedAt: string
+    updatedAt?: string
     priority?: number
     icon?: string
     image?: string
@@ -18,7 +19,7 @@ export function ArticleLayout({
   children,
   frontmatter,
 }: ArticleLayoutProps) {
-  const { title, publishedAt, icon } = frontmatter
+  const { title, publishedAt, updatedAt, icon } = frontmatter
   const tocItems = useToc()
 
   return (
@@ -40,6 +41,11 @@ export function ArticleLayout({
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(publishedAt)}
+          {updatedAt && (
+            <span className="ml-3 text-neutral-500 dark:text-neutral-500">
+              (Updated at {formatDate(updatedAt)})
+            </span>
+          )}
         </p>
       </div>
       <article className="prose">{children}</article>
