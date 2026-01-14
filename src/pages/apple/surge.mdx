@@ -132,10 +132,17 @@ chmod +x /usr/local/bin/snell-server
 
 ```bash
 mkdir -p /data/snell
-sudo chown -R nobody:nogroup /data/snell/
 snell-server --wizard -c /data/snell/snell-server.conf
 ```
 > 生成文件时，需要按 `Y` 确认写入该文件
+
+添加一个不允许登录的 snell 用户并设置权限：
+
+```bash
+sudo useradd -r -s /usr/sbin/nologin snell
+sudo chown snell:snell /usr/local/bin/snell-server
+sudo chown -R snell:snell /data/snell/
+```
 
 新建 Snell systemd 服务 `/etc/systemd/system/snell-server.service`：
 
@@ -148,8 +155,8 @@ After=network.target
 Type=simple
 Restart=on-failure
 RestartSec=5s
-User=nobody
-Group=nogroup
+User=snell
+Group=snell
 LimitNOFILE=51200
 ExecStart=/usr/local/bin/snell-server -c /data/snell/snell-server.conf
 # 允许绑定低位端口 (如 80/443)，如果不需要低位端口可注释掉
