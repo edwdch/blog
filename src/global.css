@@ -174,7 +174,7 @@ html {
 }
 
 .prose pre {
-  @apply rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-4 px-4 text-sm my-4;
+  @apply rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-4 px-4 text-sm;
   background-color: #f5f5f4;
 }
 
