@@ -3,9 +3,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 基础背景色 */
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: #fafafa;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   overflow-x: hidden;
 }
